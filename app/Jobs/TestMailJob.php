@@ -11,6 +11,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
+use Illuminate\Support\Facades\Auth;
 
 class TestMailJob implements ShouldQueue
 {
@@ -19,11 +20,11 @@ class TestMailJob implements ShouldQueue
     /**
      * Create a new job instance.
      */
-    public $data;
-     public function __construct($data)
+    public $email;
+     public function __construct($email)
     {
         // dd('hi');
-        $this->data = $data;
+        $this->email = $email;
         // dd($this->data);
     }
 
@@ -35,10 +36,7 @@ class TestMailJob implements ShouldQueue
         // Log::info('Starting TestMailJob execution.');
 
         // dd($this->data);
-        foreach($this->data as $email)
-        {
-            Mail::to($email)->send(new TestMail());
-
-        }
+        Mail::to($this->email)->send(new TestMail());
+        
     }
 }

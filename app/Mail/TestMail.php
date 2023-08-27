@@ -8,6 +8,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Auth;
 
 class TestMail extends Mailable
 {
@@ -18,7 +19,10 @@ class TestMail extends Mailable
      */
     public function __construct()
     {
-        //
+        // if (Auth::check()) {
+        //     $this->user = Auth::user();
+        // }
+          
     }
 
     /**
@@ -26,14 +30,16 @@ class TestMail extends Mailable
      */
     public function envelope(): Envelope
     {
+        // dd(Auth::check());
+
         return new Envelope(
             subject: 'mails.queueMail',
         );
     }
     public function build()
     {
-        return $this->subject('1000 sending email')
-            ->view('mails.queueMail');
+          
+        return $this->view('mails.queueMail');
             
     }
 
@@ -42,6 +48,7 @@ class TestMail extends Mailable
      */
     public function content(): Content
     {
+            
         return new Content(
             view: 'mails.queueMail',
         );

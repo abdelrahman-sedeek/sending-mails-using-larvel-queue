@@ -7,6 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    <h1> Mr Hambola speaking</h1>
+    {{--  @dd($user->name)  --}}
+    <h1> has logged in </h1>
 </body>
 </html>

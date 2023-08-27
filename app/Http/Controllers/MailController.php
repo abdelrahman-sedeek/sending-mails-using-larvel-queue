@@ -11,25 +11,15 @@ use Illuminate\Support\Facades\Mail;
 class MailController extends Controller
 {
     public function sendEmails(){
-        $emails=User::select('email')->chunk(50,function($data){
-            $emails = $data->pluck('email')->toArray();
-            dispatch(new TestMailJob($emails));
-        });
-        return('done');
-       
-        // $data='admin@gmail.com';
-        // dispatch(new TestMailJob($data));
-        // return('done');
-     
-
-
-        // $emails=User::select('email')->get();
-        // foreach($emails as $mails)
-        // {
+        $email=array('abdurhamansedeek@gmail.com', 'test2@gmail.com');
+        foreach($email as $mail)
+        {
+            
+            dispatch(new TestMailJob($mail));
+          
+        }
         
-        //         Mail::to($mails)->send(new TestMail());
-
-        // }
+       
     }
 
 
