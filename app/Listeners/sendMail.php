@@ -4,6 +4,7 @@ namespace App\Listeners;
 
 use App\Mail\TestMail;
 use App\Events\newMail;
+use App\Jobs\authEmailJob;
 use App\Jobs\TestMailJob;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -25,9 +26,8 @@ class sendMail
      */
     public function handle(newMail $event): void
     {
-        // dd(Auth::user()->name);
-        // Mail::to(Auth::user()->email)->send(new TestMail());
-        dispatch(new TestMailJob(Auth::user()->email));
+     
+        dispatch(new authEmailJob(Auth::user()->email));
 
     }
 }
